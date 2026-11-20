@@ -71,8 +71,8 @@ footer p{margin:0;max-width:78ch}
 <header class="hero">
 <h1>Walk. Charge. <em>Grow.</em></h1>
 <div>
-<p>A walkway tile turns footsteps into motion, a small generator turns motion into charge, and one battery runs a water-from-air box and a self-watering garden.</p>
-<p class="ar">كل خطوة على الممشى تشحن بطارية تسقي حديقة المدينة.</p>
+<p>A walkway tile turns footsteps into motion, a small generator turns motion into charge, and one battery runs a water-from-air box that collects water for many uses.</p>
+<p class="ar">كل خطوة على الممشى تشحن بطارية تجمع الماء من الهواء، وللماء استخدامات كثيرة.</p>
 <p class="status">Concept prototype for a Jeddah corniche walkway. The behaviour below is simulated; tile output is not measured.</p>
 </div>
 </header>
@@ -83,28 +83,27 @@ footer p{margin:0;max-width:78ch}
 <div><b>Step</b><span>A person presses the plate down about 10 mm. Springs push it back.</span><span class="ar">الضغط على اللوح ثم عودته بالنوابض</span></div>
 <div><b>Spin</b><span>A rack and pinion and two gears spin a small DC motor used as a generator.</span><span class="ar">جريدة وتروس تُدير محرّكًا صغيرًا كمولّد</span></div>
 <div><b>Store</b><span>A bridge rectifier and capacitor feed a USB power bank, with a solar panel as second source.</span><span class="ar">مقوّم ومكثّف يشحنان البطارية مع لوح شمسي</span></div>
-<div><b>Use</b><span>The battery powers an Arduino, a relay and pump, and a Peltier water-from-air box.</span><span class="ar">البطارية تغذّي الأردوينو والمضخة وصندوق الماء</span></div>
+<div><b>Use</b><span>The battery powers a Peltier water-from-air box. The system only collects water; the water can serve many uses.</span><span class="ar">البطارية تشغّل صندوق الماء، ونجمع الماء فقط وله استخدامات متعددة</span></div>
 </div>
 </section>
 
 <section>
-<div class="sh"><i>02</i><h2>Try the system</h2><p>Press the plate, switch the sun on, or drag soil moisture below 35% and watch the pump start. Tap any part for details.</p></div>
+<div class="sh"><i>02</i><h2>Try the system</h2><p>Press the plate, switch the sun on, or switch on water from air, then press Use the water to see what the collected water can do. Tap any part for details.</p></div>
 <div class="ctl">
 <button class="main" id="tour">Play guided tour</button>
 <button id="step">Step on the tile</button>
 <button id="walk" aria-pressed="false">Walking: off</button>
 <button id="sun" aria-pressed="false">Sun: off</button>
 <button id="awg" aria-pressed="false">Water from air: off</button>
-<label class="sl">Soil moisture <input type="range" id="soil" min="0" max="100" value="60"><span id="sv">60%</span></label>
+<button id="use" aria-pressed="false">Use the water: off</button>
 </div>
 <div id="tcap"></div><div id="tchip"></div>
-<div class="scroll"><svg id="d" viewBox="0 0 1440 1030" role="img" aria-label="Wired system diagram with drawn parts: tile, gears, motor generator, rectifier, Arduino, solar panel, diode, battery, relay, pump, tank, water-from-air box and garden"></svg></div>
+<div class="scroll"><svg id="d" viewBox="0 0 1440 1030" role="img" aria-label="Wired system diagram with drawn parts: tile, gears, motor generator, rectifier, solar panel, diode, battery, water-from-air box, tank and collected-water uses"></svg></div>
 <div class="cols">
 <div id="info"><h3>Selected part</h3><h3 class="t" id="it">Tap a part</h3><div class="ty" id="ity"></div><p id="ib" style="margin:6px 0 0">Click or tap any box in the diagram.</p><ul id="ip"></ul></div>
-<div><h3>Happening now</h3><ul id="ll"></ul><p class="note" id="idle" style="margin:6px 0 0">Idle. Press the plate, turn on walking or sun, or lower the soil slider.</p></div>
+<div><h3>Happening now</h3><ul id="ll"></ul><p class="note" id="idle" style="margin:6px 0 0">Idle. Press the plate, turn on walking or sun, switch on water from air, or use the water.</p></div>
 <div><h3>Wire key</h3>
 <div><span class="dot" style="background:var(--pow)"></span>Power: 5 V rail, solar</div>
-<div><span class="dot" style="background:var(--sig)"></span>Signal: sensor, relay</div>
 <div><span class="dot" style="background:var(--wat)"></span>Water: tubes</div>
 <div><span class="dot" style="background:var(--mech)"></span>Mechanical: plate, gears</div>
 <p class="note" style="margin:10px 0 0">Bright and moving means active.</p></div>
@@ -113,14 +112,6 @@ footer p{margin:0;max-width:78ch}
 
 <section>
 <div class="sh"><i>03</i><h2>Build sheet</h2><p>Part models are typical. Match them to what you order.</p></div>
-<details><summary>Arduino pin map</summary><div><div class="tw"><table>
-<tr><th>Signal</th><th>Arduino</th><th>Note</th></tr>
-<tr><td>Relay IN</td><td>D7</td><td>relay module on the 5 V rail</td></tr>
-<tr><td>Soil sensor AO</td><td>A0</td><td>analog input, 5 V sensor supply</td></tr>
-<tr><td>Step counter (optional)</td><td>A1</td><td>rectified generator voltage through a 10k/10k divider (Uno reads up to 5 V); counts steps without lighting anything</td></tr>
-<tr><td>Ground</td><td>GND</td><td>common ground everywhere</td></tr></table></div>
-<p class="note" style="margin:8px 0 0">Tile charging needs no Arduino: motor, rectifier, diode, battery.</p></div>
-</details>
 <details><summary>Parts list</summary><div><div class="tw"><table>
 <tr><th>Part</th><th>Typical model</th><th>Job</th></tr>
 <tr><td>Tile</td><td>3D-printed hex plate, 4 springs</td><td>moves about 10 mm, springs return it</td></tr>
@@ -129,20 +120,20 @@ footer p{margin:0;max-width:78ch}
 <tr><td>Generator</td><td>130 DC motor</td><td>a spun motor makes voltage</td></tr>
 <tr><td>Rectifier + cap</td><td>4× 1N5819, 470 µF</td><td>turns both directions into one polarity, smooths it</td></tr>
 <tr><td>Solar panel + diode</td><td>5 to 6 V panel, 1N5819</td><td>second charging source, one-way into the battery</td></tr>
-<tr><td>Battery</td><td>USB 5 V power bank</td><td>stores tile + solar energy, 5 V rail for Peltier, fan, relay, Arduino</td></tr>
-<tr><td>Controller</td><td>Arduino Uno</td><td>soil reading and relay</td></tr>
-<tr><td>Relay, pump, tank</td><td>5 V relay, mini 3 to 6 V pump</td><td>waters the garden</td></tr>
+<tr><td>Battery</td><td>USB 5 V power bank</td><td>stores tile + solar energy, 5 V rail for Peltier and fan</td></tr>
+<tr><td>Tank</td><td>small clear container</td><td>collects the water</td></tr>
+<tr><td>Outlet</td><td>tap or hose fitting</td><td>lets you draw water for different uses</td></tr>
 <tr><td>Water-from-air</td><td>TEC1-12706, heatsink, 5 V fan</td><td>condenses drops into a cup</td></tr>
-<tr><td>Soil sensor</td><td>analog moisture probe</td><td>tells the Arduino when dry</td></tr></table></div>
+</table></div>
 </details>
 </section>
-<footer><p>Concept visualization. On the real model the motor gives a short pulse per step, so each step adds very little charge: test with a multimeter before quoting any number. Peltier output at 5 V is weak and water yield is not measured. Tank, battery and soil values here are illustrative.</p><span>WalkWatt &middot; Jeddah &middot; 2026</span></footer>
+<footer><p>Concept visualization. On the real model the motor gives a short pulse per step, so each step adds very little charge: test with a multimeter before quoting any number. Peltier output at 5 V is weak and water yield is not measured. Tank and battery values here are illustrative. Water collected and its uses are shown, not measured.</p><span>WalkWatt &middot; Jeddah &middot; 2026</span></footer>
 </div>
 <script>
 (function(){
 var NS='http://www.w3.org/2000/svg',svg=document.getElementById('d');
 var C={pow:'#ffcd5e',sig:'#7fbaba',wat:'#6cafde',mech:'#c9d3da'};
-var st={p:0,pv:0,seq:-1,walk:0,wt:0,sun:0,awg:0,soil:60,batt:0.35,tank:0.25,plant:0.4,t:0,cup:0,cap:0,om:0,steps:0,was:false};
+var st={p:0,pv:0,seq:-1,walk:0,wt:0,sun:0,awg:0,use:0,batt:0.35,tank:0.25,t:0,cup:0,cap:0,om:0,steps:0,was:false};
 var DATA={
 tile:['Hybrid smart tile','Typical: 3D-printed hex plate on 4 springs','A step pushes the plate down about 10 mm. A rack under the plate goes down with it, and the springs push it back up.',['Both the push and the return stroke turn the pinion (in opposite directions)','Spring stiffness decides how it feels underfoot','Real power from the tile is not measured in this model']],
 gear:['Rack, pinion and gear stage','Typical: 3D-printed gears','The rack turns the pinion; gear A turns small gear B about 2.8 times faster.',['A motor needs speed to make voltage, so gearing up helps','A second stage (another 3:1) would make it spin faster still','Printed gears need a little clearance and grease']],
@@ -150,13 +141,10 @@ gen:['130 DC motor as generator','Typical: 130 brushed DC motor','Spin a brushed
 rect:['Bridge rectifier + capacitor','Typical: 4× 1N5819 Schottky, 470 µF','Both strokes give opposite polarity; the bridge makes them the same polarity, the capacitor smooths the pulses, and a diode lets current flow only into the battery.',['Scope: blue is raw generator voltage, gold is rectified','Schottky diodes lose less voltage than 1N4007s','Each step adds only a small amount of charge: many steps are needed']],
 panel:['Solar panel','Typical: small 5 to 6 V panel','Second source: charges the battery through a diode.',['The tile is the main idea, the panel is secondary','Output is not measured here']],
 diode:['Schottky diode','Typical: 1N5819','Blocks current flowing back into the panel at night.',['Stripe (cathode) toward the power bank']],
-bank:['Battery (USB power bank)','Typical: 5 V power bank','Stores what the tile and the panel make, and gives the 5 V rail for the Peltier, fan, relay and Arduino.',['Some banks switch off at very low current: test yours','Charged by the tile (rectifier) and by the panel, each through a diode']],
-esp:['Arduino Uno','Typical: Arduino Uno (5 V logic)','Reads the soil probe and closes the relay. It does not touch the tile.',['A0 soil, D7 relay','Optional A1: count steps from the rectified voltage','Powered from the 5 V rail (5V pin or USB)']],
-relay:['Relay module','Typical: 5 V single-channel relay','The Arduino switches the pump with it.',['VCC, GND, IN (from D7)','COM / NO terminals carry pump power']],
-pump:['Mini water pump','Typical: 3 to 6 V submersible pump','Moves water from the tank to the garden when the relay closes.',['Powered from the 5 V rail through the relay']],
-tank:['Water tank','Typical: small clear container','Stores the water from the Peltier box.',['Level shown here is illustrative']],
+bank:['Battery (USB power bank)','Typical: 5 V power bank','Stores what the tile and the panel make, and gives the 5 V rail for the Peltier and fan.',['Some banks switch off at very low current: test yours','Charged by the tile (rectifier) and by the panel, each through a diode']],
+tank:['Water tank','Typical: small clear container','Collects the water from the Peltier box. The system only collects water: nothing else is switched or pumped.',['Level shown here is illustrative','Use the tap or outlet to draw water for different uses']],
 awg:['Water-from-air box','Typical: TEC1-12706 Peltier + heatsink + 5 V fan','Cold plate makes humid air condense; drops fall into the cup.',['Concept only: output is not measured','At 5 V a Peltier is weak','Fan cools the hot side heatsink']],
-garden:['Smart garden','Typical: analog soil moisture probe','Probe tells the Arduino when the soil is dry (below 35% in this demo).',['Pump runs only while dry and the tank has water','Garden and tank are display parts in the model']]};
+uses:['Collected water, many uses','Concept: uses shown, not connected','The tank only collects water. Once collected, it can be used in several ways, depending on how clean it is and what it is for.',['Irrigation: plants, by hand or hose','Cleaning: sidewalk, benches, tools','Cooling mist: a light spray on hot days','Drinking: only after filtering and testing','Yield is not measured here']]};
 function sel(id){var d=DATA[id];if(!d)return;document.getElementById('it').textContent=d[0];document.getElementById('ity').textContent=d[1];document.getElementById('ib').textContent=d[2];document.getElementById('ip').innerHTML=d[3].map(function(x){return'<li>'+x+'</li>'}).join('')}
 function H(t,a,x){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(x!=null)e.textContent=x;return e}
 var layer=H('g',{id:'mainlayer'});svg.appendChild(layer);var FORCE={};
@@ -167,21 +155,15 @@ var WIRES=[
 {id:'rb',t:'pow',p:[[1015,245],[1015,300],[640,300],[640,330]],lab:'tile charges the battery',lx:760,ly:292},
 {id:'ps',t:'pow',p:[[290,400],[330,400]],lab:''},
 {id:'pd',t:'pow',p:[[440,400],[500,400]],lab:''},
-{id:'be',t:'pow',p:[[780,400],[830,400]],lab:'5 V',lx:786,ly:392},
-{id:'br',t:'pow',p:[[780,470],[780,580],[1220,580],[1220,610]],lab:'5 V',lx:900,ly:572},
-{id:'er',t:'sig',p:[[1000,545],[1000,680],[1100,680]],lab:'D7 relay IN',lx:880,ly:672},
-{id:'se',t:'sig',p:[[1380,800],[1380,500],[1130,500]],lab:'A0 soil AO',lx:1200,ly:492},
-{id:'rp',t:'pow',p:[[1160,750],[1160,780],[790,780],[790,800]],lab:'pump power (switched)',lx:900,ly:772},
 {id:'ba',t:'pow',p:[[640,490],[640,745],[200,745],[200,800]],lab:'5 V to Peltier + fan',lx:300,ly:737},
 {id:'at',t:'wat',p:[[370,885],[430,885]],lab:''},
-{id:'tp',t:'wat',p:[[630,885],[690,885]],lab:''},
-{id:'pg',t:'wat',p:[[890,875],[980,875]],lab:''}];
+{id:'tp',t:'wat',p:[[630,860],[720,860]],lab:'tap',lx:650,ly:852}];
 var wel={};
 WIRES.forEach(function(w){var d=w.p.map(function(q,i){return(i?'L':'M')+q[0]+','+q[1]}).join(' ');var sw=w.w||5;
  var b=H('path',{d:d,fill:'none',stroke:C[w.t],'stroke-width':sw,'stroke-linejoin':'round','stroke-linecap':'round',opacity:0.2});if(w.t==='sig')b.setAttribute('stroke-dasharray','2 8');
  var f=H('path',{d:d,fill:'none',stroke:C[w.t],'stroke-width':sw,'stroke-linejoin':'round','stroke-linecap':'round','stroke-dasharray':'10 12',opacity:0});
  layer.appendChild(b);layer.appendChild(f);wel[w.id]=f;if(w.lab)layer.appendChild(H('text',{x:w.lx,y:w.ly,fill:'#dccdce','font-size':13,'font-family':'Nunito'},w.lab))});
-var NODES={};var AR={tile:'البلاطة',gear:'التروس',gen:'مولّد',rect:'مقوّم',panel:'لوح شمسي',diode:'دايود',bank:'البطارية',esp:'أردوينو',relay:'ريلاي',awg:'ماء من الهواء',tank:'خزان',pump:'مضخة',garden:'حديقة'};
+var NODES={};var AR={tile:'البلاطة',gear:'التروس',gen:'مولّد',rect:'مقوّم',panel:'لوح شمسي',diode:'دايود',bank:'البطارية',awg:'ماء من الهواء',tank:'خزان',uses:'استخدامات متعددة'};
 function node(id,x,y,w,h,title,sub,col,art){
  var g=H('g',{class:'node',tabindex:0,role:'button','aria-label':title,transform:'translate('+x+','+y+')'});
  g.appendChild(H('rect',{class:'nb',width:w,height:h,rx:14,fill:'#564345',stroke:col,'stroke-width':2}));
@@ -220,18 +202,6 @@ var artDiode='<path d="M10,20 L40,20 M70,20 L100,20" stroke="#c9ced4" stroke-wid
 var artBank='<rect x="20" y="0" width="240" height="72" rx="12" fill="#2a3340" stroke="#58677a" stroke-width="2"/>'
  +[0,1,2,3].map(function(i){return '<rect id="pb'+i+'" x="'+(150+i*26)+'" y="12" width="20" height="10" rx="2" fill="#333"/>'}).join('')
  +'<rect x="26" y="26" width="30" height="12" rx="2" fill="#aab0b6"/><rect x="26" y="46" width="30" height="12" rx="2" fill="#aab0b6"/>'+T(66,36,11,'in (panel)','#dccdce')+T(66,56,11,'out USB 5 V','#dccdce')+T(150,54,12,'battery','#fff');
-var artEsp='<rect x="10" y="0" width="280" height="140" rx="8" fill="#0f7c8a" stroke="#0a5560" stroke-width="2"/>'
- +'<rect x="14" y="30" width="52" height="46" rx="3" fill="#c9ced4" stroke="#8d949b"/>'+T(18,56,10,'USB-B','#3a4048')
- +'<rect x="14" y="88" width="40" height="34" rx="3" fill="#222" stroke="#555"/>'+T(18,108,9,'DC jack','#dccdce')
- +'<rect x="110" y="48" width="110" height="26" rx="2" fill="#1a1d22"/>'+T(122,66,12,'ATmega328P','#9aa3ab')
- +'<rect x="240" y="40" width="30" height="36" rx="3" fill="#c9ced4"/>'+T(242,62,9,'16 MHz','#3a4048')
- +[0,1,2,3,4,5,6,7,8,9].map(function(i){var u={7:1}[i];return '<rect x="'+(90+i*17)+'" y="4" width="11" height="9" fill="'+(u?'#ffcd5e':'#222')+'"/>'}).join('')
- +T(88,26,9,'D7 (relay)','#ffcd5e')
- +[0,1,2,3,4,5].map(function(i){var u={0:1,1:1}[i];return '<rect x="'+(130+i*17)+'" y="124" width="11" height="9" fill="'+(u?'#ffcd5e':'#222')+'"/>'}).join('')
- +T(122,118,9,'A0 soil','#ffcd5e')+T(168,118,9,'A1 step count','#ffcd5e')+T(30,12,9,'5V GND','#dccdce')+T(80,92,11,'Arduino Uno','#fff')+T(80,104,10,'reads soil, drives relay','#f1e9e9');
-var artRelay='<rect x="20" y="0" width="200" height="76" rx="6" fill="#1c5fa8" stroke="#0e3d73"/><rect x="50" y="10" width="70" height="48" rx="4" fill="#2b6fd0" stroke="#173f7a"/>'+T(58,38,11,'SRD-05VDC','#fff')
- +'<rect x="140" y="12" width="68" height="44" rx="3" fill="#2e9d5a"/><circle cx="154" cy="34" r="6" fill="#bbb"/><circle cx="174" cy="34" r="6" fill="#bbb"/><circle cx="194" cy="34" r="6" fill="#bbb"/>'+T(146,70,10,'NC  COM  NO','#dccdce')+'<circle id="rled" cx="130" cy="64" r="5" fill="#552"/>'+T(26,70,10,'VCC IN GND','#ffcd5e');
-var artPump='<rect x="36" y="6" width="100" height="46" rx="10" fill="#2c3e50" stroke="#6b7f93" stroke-width="2"/><circle cx="86" cy="29" r="14" fill="#1a2530"/><path id="blade" d="M86,29 L86,17 M86,29 L98,29 M86,29 L86,41 M86,29 L74,29" stroke="#6cafde" stroke-width="3"/><rect x="136" y="22" width="34" height="14" rx="3" fill="#9fb4c4"/><path d="M36,18 L10,18 M36,40 L10,40" stroke="#ffcd5e" stroke-width="3"/>'+T(36,70,12,'+5 V switched');
 var artTank='<rect x="20" y="0" width="160" height="76" rx="6" fill="none" stroke="#dccdce" stroke-width="2"/><rect id="tkw" x="22" y="74" width="156" height="0" fill="#6cafde" opacity="0.85"/>'+T(60,40,12,'tank','#dccdce');
 var artAwg='<rect x="20" y="30" width="210" height="82" rx="4" fill="rgba(190,230,245,.10)" stroke="#bfe6f5" stroke-width="2"/>'
  +'<rect x="150" y="-4" width="56" height="26" rx="3" fill="#33383e"/><g id="fan" transform="translate(178,9)"><circle r="11" fill="#1d2126"/><path d="M0,0 L0,-9 M0,0 L9,0 M0,0 L0,9 M0,0 L-9,0" stroke="#9aa3ab" stroke-width="3"/></g>'
@@ -239,8 +209,11 @@ var artAwg='<rect x="20" y="30" width="210" height="82" rx="4" fill="rgba(190,23
  +'<rect x="150" y="32" width="56" height="8" fill="#e2563f" id="hot"/><rect x="150" y="40" width="56" height="6" fill="#e8ecef"/><rect x="146" y="46" width="64" height="7" rx="2" fill="#aab2ba" id="cold"/>'
  +'<circle id="drop" cx="178" cy="60" r="3.5" fill="#8fd2f7" opacity="0"/><rect x="156" y="86" width="44" height="26" rx="3" fill="rgba(220,240,250,.25)" stroke="#bfe6f5"/><rect id="cupw" x="158" y="110" width="40" height="0" fill="#6cafde"/>'
  +T(238,14,11,'5 V fan')+T(238,36,11,'heatsink')+T(238,52,11,'Peltier')+T(238,68,11,'cold plate')+T(238,104,11,'cup')+T(28,50,11,'TEC1-12706')+T(28,66,11,'Peltier + fan')+T(28,82,11,'concept only','#ffcd5e');
-var artGarden='<rect x="20" y="64" width="270" height="74" rx="4" fill="#7a5836" stroke="#a87c4e" stroke-width="2"/><rect id="soilfill" x="24" y="68" width="262" height="30" fill="#3a2716"/><g id="plants"></g>'
- +'<rect x="338" y="30" width="24" height="108" rx="2" fill="#f2efe2" stroke="#b5ae94"/><rect x="330" y="8" width="40" height="26" rx="3" fill="#1c5fa8"/>'+T(336,26,11,'AO','#fff')+'<path d="M346,34 L346,134 M354,34 L354,134" stroke="#c8a23a" stroke-width="2"/>'+T(310,154,11,'soil probe','#f2efe2');
+var cd=function(x,y,id,col,ttl,ar,sub,ic){return '<rect id="'+id+'" x="'+x+'" y="'+y+'" width="255" height="100" rx="10" fill="rgba(255,255,255,.04)" stroke="'+col+'" stroke-width="2"/>'+ic+T(x+64,y+34,17,ttl,'#fff').replace('font-family="Nunito"','font-family="Nunito" font-weight="800"')+'<text x="'+(x+240)+'" y="'+(y+34)+'" fill="#ffcd5e" font-size="14" font-family="Noto Sans Arabic" text-anchor="end">'+ar+'</text>'+T(x+64,y+58,12,sub,'#dccdce')};
+var artUses=cd(20,0,'u0','#7fbaba','Irrigation','ريّ','plants, by hand or hose','<path d="M36,70 L36,40 M36,56 q-14,-4 -14,-18 q14,0 14,18 M36,50 q14,-4 14,-18 q-14,0 -14,18" stroke="#7fbaba" stroke-width="3" fill="none" stroke-linecap="round"/>')
+ +cd(295,0,'u1','#6cafde','Cleaning','تنظيف','sidewalk, benches, tools','<path d="M322,28 q-14,22 0,34 q14,-12 0,-34z" fill="#6cafde"/><path d="M336,66 l8,-6 M336,74 l12,0" stroke="#6cafde" stroke-width="3" stroke-linecap="round"/>')
+ +cd(20,115,'u2','#ffcd5e','Cooling mist','رذاذ تبريد','light spray on hot days','<g fill="#ffcd5e"><circle cx="30" cy="150" r="3"/><circle cx="42" cy="140" r="3"/><circle cx="42" cy="162" r="3"/><circle cx="54" cy="152" r="3"/><circle cx="54" cy="172" r="3"/><circle cx="30" cy="174" r="2.5"/></g>')
+ +cd(295,115,'u3','#c9d3da','Drinking','شرب','only after filtering + testing','<path d="M314,138 l30,0 l-4,34 l-22,0z" fill="none" stroke="#c9d3da" stroke-width="3" stroke-linejoin="round"/><path d="M319,152 l20,0" stroke="#6cafde" stroke-width="3"/>');
 node('tile',40,40,250,205,'Hybrid smart tile','plate, springs, rack','#c9d3da',artTile);
 node('gear',330,40,240,205,'Gear stage','pinion + printed gears','#c9d3da',artGear);
 node('gen',610,40,230,205,'Motor as generator','130 motor, spun by the gears','#ffcd5e',artGen);
@@ -248,20 +221,15 @@ node('rect',890,40,250,205,'Rectifier + capacitor','4 diodes, 470 µF','#ffcd5e'
 node('panel',40,330,250,140,'Solar panel','side source','#ffcd5e',artPanel);
 node('diode',330,350,110,90,'Diode','one-way','#ffcd5e',artDiode);
 node('bank',500,330,280,160,'Battery (power bank)','charged by tile + solar','#ffcd5e',artBank);
-node('esp',830,330,300,215,'Arduino Uno','soil + relay controller','#7fbaba',artEsp);
-node('relay',1100,610,240,140,'Relay module','switches the pump','#7fbaba',artRelay);
 node('awg',40,800,330,170,'Water-from-air box','Peltier + heatsink + fan','#6cafde',artAwg);
-node('tank',430,800,200,150,'Water tank','','#6cafde',artTank);
-node('pump',690,800,200,125,'Mini pump','tank to garden','#6cafde',artPump);
-node('garden',980,800,420,200,'Smart garden','plants + soil moisture probe','#6cafde',artGarden);
+node('tank',430,800,200,150,'Water tank','collects only','#6cafde',artTank);
+node('uses',720,720,570,290,'Collected water, many uses','shown, not connected','#6cafde',artUses);
 var $=function(i){return svg.querySelector('#'+i)};
-var spr=$('spr'),pl=$('plants'),pls=[];
-for(var i=0;i<6;i++){var p=H('path',{fill:'none',stroke:'#3fbb6c','stroke-width':4,'stroke-linecap':'round'});pl.appendChild(p);pls.push(p)}
+var spr=$('spr');
 function spring(top){var s='';[50,82,170,202].forEach(function(x){var n=6,y0=top,y1=124,d='M'+x+','+y0;for(var k=1;k<=n;k++){d+=' L'+(x+(k%2?7:-7))+','+(y0+(y1-y0)*k/n)}s+=d+' L'+x+','+y1+' '});spr.setAttribute('d',s)}
 function tog(id,k,t){var b=document.getElementById(id);b.addEventListener('click',function(){st[k]=st[k]?0:1;b.classList.toggle('on',!!st[k]);b.setAttribute('aria-pressed',!!st[k]);b.textContent=t+(st[k]?': on':': off')})}
-tog('sun','sun','Sun');tog('awg','awg','Water from air');tog('walk','walk','Walking');
+tog('sun','sun','Sun');tog('awg','awg','Water from air');tog('walk','walk','Walking');tog('use','use','Use the water');
 document.getElementById('step').addEventListener('click',function(){if(st.seq<0)st.seq=0});
-var sl=document.getElementById('soil');sl.addEventListener('input',function(){st.soil=+sl.value;document.getElementById('sv').textContent=sl.value+'%'});
 function on(w,v){wel[w].setAttribute('opacity',(v||FORCE[w])?1:0)}
 function sm(a,b,x){var t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)}
 function stroke(t){return sm(0,0.2,t)*(1-sm(0.42,0.8,t))}
@@ -276,17 +244,17 @@ var CUES=[
 [26.8,34,'A solar panel charges the same battery, so the system has two sources.','لوح شمسي يشحن البطارية نفسها، فيصبح للنظام مصدران.',['panel','diode','bank']],
 [34.8,42,'The battery powers a Peltier cooler. Its cold plate makes humid air condense into drops.','تغذّي البطارية مبرّد بلتيير، ولوحه البارد يكثّف الهواء الرطب إلى قطرات.',['bank','awg']],
 [42,50,'Drops fall into a cup and fill the tank. This part is a concept model, not measured.','تسقط القطرات في كوب وتملأ الخزان. هذا الجزء نموذج تصوري غير مقاس.',['awg','tank']],
-[50.8,58,'A soil sensor reports to an Arduino. When the soil is dry, the Arduino closes a relay.','حسّاس التربة يخبر الأردوينو، وعندما تجفّ التربة يُغلق الأردوينو الريلاي.',['garden','esp','relay']],
-[58,66,'The pump moves tank water to the garden. Tank, pump and garden are display only.','تنقل المضخة الماء من الخزان إلى الحديقة. الخزان والمضخة والحديقة للعرض فقط.',['relay','pump','tank','garden']],
-[66.8,76,'Everything is connected: the tile and the sun charge one battery, which runs the cooler, the controller and the pump.','كل شيء متصل: البلاطة والشمس تشحنان بطارية واحدة تشغّل المبرّد والمتحكّم والمضخة.',null],
+[50.8,58,'The tank only collects water. Switch on the tap and the same water can serve many uses.','الخزان يجمع الماء فقط، وعند فتح الصنبور يخدم الماء استخدامات كثيرة.',['tank','uses']],
+[58,66,'Irrigation, cleaning, cooling mist, or drinking after filtering and testing. Uses are shown, not connected.','ريّ، تنظيف، رذاذ تبريد، أو شرب بعد التصفية والفحص. الاستخدامات معروضة وغير موصولة.',['uses','tank']],
+[66.8,76,'Everything is connected: the tile and the sun charge one battery, which runs the cooler that collects the water.','كل شيء متصل: البلاطة والشمس تشحنان بطارية واحدة تشغّل المبرّد الذي يجمع الماء.',null],
 [77,89.5,'Steps, sun and air: one walkway that gives back to the people who walk it. WalkWatt, powered by Jeddah\'s people.','خطوات وشمس وهواء: ممشى واحد يردّ الجميل لمن يمشون عليه. ووك وات، بقوة أهل جدة.',null]];
-var CHIPS=[[0,4.4,'Concept model'],[4.4,26.5,'Concept: tile output not measured'],[26.5,34.5,'Concept: solar charging'],[34.5,50.5,'Water from air: concept, not measured'],[50.5,66.5,'Tank, pump, garden: display only'],[66.5,90,'Concept model']];
-var EV=[[5.6,function(){st.seq=0}],[8.2,function(){st.seq=0}],[11.0,function(){st.seq=0}],[14.6,function(){st.walk=1}],[27,function(){st.sun=1}],[35,function(){st.awg=1}],[52,function(){st.soil=10}],[59,function(){st.soil=8}]];
+var CHIPS=[[0,4.4,'Concept model'],[4.4,26.5,'Concept: tile output not measured'],[26.5,34.5,'Concept: solar charging'],[34.5,50.5,'Water from air: concept, not measured'],[50.5,66.5,'Tank and uses: display only'],[66.5,90,'Concept model']];
+var EV=[[5.6,function(){st.seq=0}],[8.2,function(){st.seq=0}],[11.0,function(){st.seq=0}],[14.6,function(){st.walk=1}],[27,function(){st.sun=1}],[35,function(){st.awg=1}],[52,function(){st.use=1}],[66,function(){st.use=0}]];
 var tt=0,tourOn=false,evi=0,lastCue=-2,lastFocus='';
 function setFocus(ids){var k=ids?ids.join(','):'';if(k===lastFocus)return;lastFocus=k;for(var id in NODES)NODES[id].style.opacity=(!ids||ids.indexOf(id)>=0)?1:0.3}
-function startTour(){st.p=0;st.seq=-1;st.walk=0;st.wt=0;st.sun=0;st.awg=0;st.soil=60;st.batt=0.1;st.tank=0.12;st.plant=0.3;st.cup=0;st.cap=0;st.om=0;st.steps=0;
- ['sun','awg','walk'].forEach(function(i){var b=document.getElementById(i);b.classList.remove('on');b.setAttribute('aria-pressed','false')});document.getElementById('sun').textContent='Sun: off';document.getElementById('awg').textContent='Water from air: off';document.getElementById('walk').textContent='Walking: off';
- sl.value=60;document.getElementById('sv').textContent='60%';tt=0;evi=0;tourOn=true;lastCue=-2;lastFocus='x';document.getElementById('tour').textContent='Stop tour'}
+function startTour(){st.p=0;st.seq=-1;st.walk=0;st.wt=0;st.sun=0;st.awg=0;st.use=0;st.batt=0.1;st.tank=0.12;st.cup=0;st.cap=0;st.om=0;st.steps=0;
+ ['sun','awg','walk','use'].forEach(function(i){var b=document.getElementById(i);b.classList.remove('on');b.setAttribute('aria-pressed','false')});document.getElementById('sun').textContent='Sun: off';document.getElementById('awg').textContent='Water from air: off';document.getElementById('walk').textContent='Walking: off';document.getElementById('use').textContent='Use the water: off';
+ tt=0;evi=0;tourOn=true;lastCue=-2;lastFocus='x';document.getElementById('tour').textContent='Stop tour'}
 function stopTour(){tourOn=false;setFocus(null);document.getElementById('tcap').style.display='none';document.getElementById('tchip').style.display='none';document.getElementById('tour').textContent='Play guided tour'}
 function tour(dt){if(!tourOn)return;tt+=dt;while(evi<EV.length&&EV[evi][0]<=tt){EV[evi][1]();evi++}
  var ci=-1;for(var i=0;i<CUES.length;i++)if(tt>=CUES[i][0]&&tt<CUES[i][1]){ci=i;break}
@@ -305,8 +273,7 @@ function tick(dt){st.t+=dt;
  HE.push(e);HR.push(r);if(HE.length>N){HE.shift();HR.shift()}
  if(st.sun)st.batt=Math.min(1,st.batt+dt*0.05);st.batt=Math.min(1,st.batt+r*dt*0.03);
  var awg=st.awg&&st.batt>0.02;if(awg){st.batt=Math.max(0,st.batt-dt*0.008);st.tank=Math.min(1,st.tank+dt*0.015);st.cup=Math.min(1,st.cup+dt*0.02)}
- var dry=st.soil<35,pump=dry&&st.tank>0.05&&st.batt>0.02;
- if(pump){st.tank=Math.max(0,st.tank-dt*0.05);st.batt=Math.max(0,st.batt-dt*0.01);st.soil=Math.min(100,st.soil+dt*9);sl.value=Math.round(st.soil);document.getElementById('sv').textContent=Math.round(st.soil)+'%';st.plant=Math.min(1,st.plant+dt*0.03)}
+ var usingW=st.use&&st.tank>0.05;if(usingW){st.tank=Math.max(0,st.tank-dt*0.04)}
  var dy=st.p*14;$('plate').setAttribute('transform','translate(0,'+dy+')');$('rack').setAttribute('transform','translate(0,'+dy+')');spring(70+dy);
  var ang=st.p*63;$('pin').setAttribute('transform','rotate('+ang+')');$('gA').setAttribute('transform','rotate('+(ang*12.7/40*0+ang*0.32)+')');
  $('gB').setAttribute('transform','rotate('+(-ang*0.32*2.8)+')');$('rot').setAttribute('transform','rotate('+(-ang*0.32*2.8)+')');
@@ -315,16 +282,15 @@ function tick(dt){st.t+=dt;
  var pe=HE.map(function(x,i){return (140+i)+','+(95-x*8)}).join(' '),pr=HR.map(function(x,i){return (140+i)+','+(135-x*8)}).join(' ');
  $('trE').setAttribute('points',pe);$('trR').setAttribute('points',pr);
  for(var i=0;i<4;i++)$('pb'+i).setAttribute('fill',st.batt>(i+0.5)/4-0.1?(st.batt<0.2?'#e2563f':'#7fbaba'):'#333');
- $('rled').setAttribute('fill',pump?'#ff4d3d':'#552');$('blade').setAttribute('transform','rotate('+(pump?st.t*600:0)+' 86 29)');
+
+ for(var k=0;k<4;k++){var u=$('u'+k);u.setAttribute('fill',usingW?'rgba(108,175,222,.22)':'rgba(255,255,255,.04)');u.setAttribute('stroke-width',usingW?4:2)}
  var tk=$('tkw'),h=76*st.tank;tk.setAttribute('height',h);tk.setAttribute('y',74-h);
  var cw=$('cupw'),ch=24*st.cup;cw.setAttribute('height',ch);cw.setAttribute('y',110-ch);
  $('fan').setAttribute('transform','translate(178,9) rotate('+(awg?st.t*900:0)+')');
  $('drop').setAttribute('cy',56+((st.t*0.9)%1)*40);$('drop').setAttribute('opacity',awg?1:0);$('cold').setAttribute('fill',awg?'#8fd2f7':'#aab2ba');$('hot').setAttribute('fill',awg?'#e2563f':'#c9b27a');
- $('soilfill').setAttribute('fill',st.soil<35?'#8a6a43':st.soil<65?'#5b3f26':'#2f1f12');
- pls.forEach(function(p,i){var x=60+i*44,hh=10+st.plant*34+(i%2)*6;p.setAttribute('d','M'+x+',66 L'+x+','+(66-hh)+' M'+x+','+(66-hh*0.7)+' q14,-8 22,-2 M'+x+','+(66-hh*0.45)+' q-14,-8 -22,-2')});
  var off=-st.t*40,mv=st.om>0.15;for(var k in wel)wel[k].setAttribute('stroke-dashoffset',off);
- on('m1',mv);on('m2',mv);on('gr',mv);on('rb',st.om>0.15||st.cap>0.1);on('ps',st.sun);on('pd',st.sun);on('be',1);on('br',pump);on('rp',pump);on('er',pump);on('se',dry);on('ba',awg);on('at',awg);on('tp',pump);on('pg',pump);
- if(st.t-tx>0.15){tx=st.t;var L=[[mv,'Step: plate and rack move down, the pinion turns gear A, gear B spins the motor about 2.8× faster, the rectifier charges the battery ('+Math.round(st.batt*100)+'%, steps so far: '+st.steps+').'],[st.sun,'Sun: the panel charges the battery too ('+Math.round(st.batt*100)+'%).'],[awg,'Water from air: bank runs Peltier + fan, drops fall into the cup, tank fills ('+Math.round(st.tank*100)+'%).'],[pump,'Dry soil: Arduino closes the relay, pump moves tank water to the garden.']].filter(function(x){return x[0]});
+ on('m1',mv);on('m2',mv);on('gr',mv);on('rb',st.om>0.15||st.cap>0.1);on('ps',st.sun);on('pd',st.sun);on('ba',awg);on('at',awg);on('tp',usingW);
+ if(st.t-tx>0.15){tx=st.t;var L=[[mv,'Step: plate and rack move down, the pinion turns gear A, gear B spins the motor about 2.8× faster, the rectifier charges the battery ('+Math.round(st.batt*100)+'%, steps so far: '+st.steps+').'],[st.sun,'Sun: the panel charges the battery too ('+Math.round(st.batt*100)+'%).'],[awg,'Water from air: bank runs Peltier + fan, drops fall into the cup, tank fills ('+Math.round(st.tank*100)+'%).'],[usingW,'Use the water: the tank is drawn down and the water serves irrigation, cleaning, cooling mist or drinking (after filtering and testing). Display only.']].filter(function(x){return x[0]});
   document.getElementById('ll').innerHTML=L.map(function(x){return'<li>'+x[1]+'</li>'}).join('');document.getElementById('idle').style.display=L.length?'none':'block'}
 }
 function frame(now){var dt=Math.min(0.05,(now-last)/1000);last=now;if(!window.MANUAL){tour(dt);tick(dt)}requestAnimationFrame(frame)}
